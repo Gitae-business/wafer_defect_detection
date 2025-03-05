@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# venv
+/venv/
+
+# model & data
+api/CNN_01.pth
+data/LSWMD.pkl

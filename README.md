@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+WM-811K Wafer Map 데이터셋을 활용한 반도체 결함 분류 프로젝트
 
-## Getting Started
+1. 서론
+1.1 프로젝트 배경 및 목적
+반도체 산업은 한국 경제에서 중요한 위치를 차지하고 있습니다. 2021년 기준으로 반도체 수출액은 상위 10대 품목 중 35%를 차지할 정도로 국내 무역경제에 직접적인 영향을 미치고 있습니다3. 이러한 중요성을 감안할 때, 반도체 제조 과정에서의 품질 관리와 결함 감지는 매우 중요한 과제입니다.
 
-First, run the development server:
+본 프로젝트의 목적은 WM-811K Wafer Map 데이터셋을 활용하여 반도체 웨이퍼의 결함을 정확하게 분류하고 분석하는 것입니다. 이를 통해 반도체 제조 공정의 효율성을 높이고 불량률을 낮추는 데 기여하고자 합니다.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1.2 WM-811K 데이터셋 소개
+WM-811K 데이터셋은 반도체 웨이퍼 맵의 결함 패턴을 분석하기 위해 널리 사용되는 공개 데이터셋입니다.
+코드 동작에 앞서 아래 링크에서 pkl을 다운받아 data 폴더 안에 넣어주세요.
+https://www.kaggle.com/datasets/qingyi/wm811k-wafer-map
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+이 데이터셋은 다음과 같은 특징을 가지고 있습니다:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+총 811,457개의 웨이퍼 맵으로 구성되어 있습니다.
+46,293개의 실제 로트(lot)에서 수집된 데이터입니다
+9가지 클래스(Center, Donut, Edge-Loc, Edge-Ring, Loc, Near-full, None, Random, Scratch)로 결함 패턴이 분류되어 있습니다.
+웨이퍼 다이 크기, 로트 이름, 웨이퍼 인덱스 등의 추가 정보를 포함하고 있습니다.
+이 데이터셋은 클래스 간 데이터 불균형 문제가 있어, 이를 해결하기 위한 데이터 증강 기법이 필요할 수 있습니다.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+본 프로젝트에서는 이 데이터셋을 활용하여 머신러닝 및 딥러닝 기법을 적용해 결함 분류의 정확도를 높이고, 결함의 위치와 패턴을 시각화하여 분석하는 것을 목표로 합니다.
 
-## Learn More
+2. 데이터 탐색 및 EDA
+2.1 데이터 구조 파악
+2.2 기술 통계 분석
+2.3 시각화를 통한 인사이트 도출
 
-To learn more about Next.js, take a look at the following resources:
+3. 데이터 전처리
+3.1 결측치 처리
+3.2 이상치 처리
+3.3 특성 선택 및 생성
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. 머신러닝을 활용한 결함 분류
+4.1 모델 선택 및 학습
+4.2 모델 평가 및 비교
+4.3 하이퍼파라미터 튜닝
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+5. CNN을 활용한 결함 분류
+5.1 모델 아키텍처 설계
+5.2 모델 학습 및 최적화
+5.3 성능 평가 및 시각화
 
-## Deploy on Vercel
+6. 결과 분석 및 해석
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+7. 결론 및 제안
+7.1 프로젝트 요약
+7.2 한계점 및 향후 연구 방향
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
