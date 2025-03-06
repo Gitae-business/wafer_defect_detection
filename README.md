@@ -1,5 +1,50 @@
 WM-811K Wafer Map 데이터셋을 활용한 반도체 결함 분류 프로젝트
 
+0. 환경 구축
+이 프로젝트는 157MB의 WM-811K Wafer Map 데이터셋에 간단한 CNN 모델을 적용해
+9가지의 결함 종류를 분류하는 가벼운 딥러닝 프로젝트입니다.
+하단에 기재된 절차를 통해 직접 코드를 구동해 볼 수 있습니다.
+
+먼저 프로젝트 폴더를 생성할 경로에서 터미널로
+git clone https://github.com/Gitae-business/wafer_defect_detection.git
+를 실행한 후 해당 폴더로 이동합니다.
+프로젝트 폴더의 최상위 경로에 대해 root라고 하겠습니다.
+
+root에 data 폴더를 생성해줍니다.
+아래 링크에서 pkl을 다운받아 data 폴더 안에 넣어주세요.
+https://www.kaggle.com/datasets/qingyi/wm811k-wafer-map
+
+@/api/analysis.ipynb 파일에서 데이터 분석 내용을 확인하고 모델을 생성할 수 있습니다.
+모델을 직접 학습시키거나 구조를 바꾸고 싶다면 해당 파일을 실행하시면 됩니다.
+ipynb 파일을 구동시키지 않더라도 index.py를 실행시키면 미리 학습시킨 파일이 자동으로 root에 다운됩니다.
+** 
+만약 .pth 파일이 제대로 다운되지 않는다면 아래 링크에서 직접 다운받으실 수 있습니다.
+https://drive.google.com/file/d/1t5ZQjAcKBLlkAhstqMogNqWBXCe5G3Jg/view?usp=drive_link
+해당 CNN_01_weights.pth 파일을 root 안에 넣어주세요
+**
+
+root에서 .env.local 파일을 생성해주세요.
+이는 index.py로 동작시킨 Flask API의 엔드포인트를 명시하기 위한 환경변수 파일입니다.
+.env.local을 열어 아래와 같이 작성하고 저장해줍니다.
+NEXT_PUBLIC_API_URL=http://localhost:5000
+
+index.py로 Flask API를 활성화하기 위해서 파이썬 가상환경이 필요합니다.
+터미널에 다음을 차례로 입력합니다.
+python -m venv venv
+venv/Scripts/activate
+pip install -r requirements.txt
+이후 F1을 눌러 명령 팔레트를 열고, 'Python: Select Interpreter'를 선택합니다.
+Python {설치된 파이썬 버전} ('venv': venv) 라고 적힌 탭을 클릭합니다.
+그 후 index.py 파일을 클릭하고 우측 상단 실행 버튼을 눌러 Flask 서버를 실행합니다.
+이제 http://localhost:5000 경로로 Flask API에 접근이 가능합니다.
+
+마지막으로 다른 터미널을 하나 더 열어줍니다.
+pip i 를 입력하여 라이브러리를 설치합니다.
+설치가 완료되었다면 npm run dev를 입력합니다.
+http://localhost:3000 에서 웹 실행을 확인할 수 있습니다.
+
+
+
 1. 서론
 1.1 프로젝트 배경 및 목적
 반도체 산업은 한국 경제에서 중요한 위치를 차지하고 있습니다. 2021년 기준으로 반도체 수출액은 상위 10대 품목 중 35%를 차지할 정도로 국내 무역경제에 직접적인 영향을 미치고 있습니다3. 이러한 중요성을 감안할 때, 반도체 제조 과정에서의 품질 관리와 결함 감지는 매우 중요한 과제입니다.
@@ -7,10 +52,6 @@ WM-811K Wafer Map 데이터셋을 활용한 반도체 결함 분류 프로젝트
 본 프로젝트의 목적은 WM-811K Wafer Map 데이터셋을 활용하여 반도체 웨이퍼의 결함을 정확하게 분류하고 분석하는 것입니다. 이를 통해 반도체 제조 공정의 효율성을 높이고 불량률을 낮추는 데 기여하고자 합니다.
 
 1.2 WM-811K 데이터셋 소개
-WM-811K 데이터셋은 반도체 웨이퍼 맵의 결함 패턴을 분석하기 위해 널리 사용되는 공개 데이터셋입니다.
-코드 동작에 앞서 아래 링크에서 pkl을 다운받아 data 폴더 안에 넣어주세요.
-https://www.kaggle.com/datasets/qingyi/wm811k-wafer-map
-
 이 데이터셋은 다음과 같은 특징을 가지고 있습니다:
 
 총 811,457개의 웨이퍼 맵으로 구성되어 있습니다.
